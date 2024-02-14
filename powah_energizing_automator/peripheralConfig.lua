@@ -1,6 +1,6 @@
 return
 {
-    ["mainInventory"] = "quantumstorage:chestdiamond_0",
+    ["mainInventory"] = "dankstorage:dank_tile_0",
     ["mainMonitor"] = "left",
     ["energizingOrb"] = "powah:energizing_orb_0"
 }
