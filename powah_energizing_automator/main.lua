@@ -11,12 +11,13 @@ local mainInv = peripheral.wrap(peripheralConfig["mainInventory"])
 ---@param inv Inventory
 ---@param recipeConfig table
 ---@return boolean
-function canCraft(itemName, inv)
-    for k, v in ipairs(recipeConfig) do
-        if v.name == itemName then
-            for kk, currentIngredient in ipairs(v.ingredients) do
+function canCraft(itemToCraft, inv)
+    for k, itemName in ipairs(recipeConfig) do
+        if itemName.name == itemToCraft then
+            for kk, currentIngredient in ipairs(itemName.ingredients) do
                 local foundEnough = false
                 for slot, item in pairs(inv.list()) do
+                    --Assume only one slot in the inventory can hold a particular item (dank) TODO: Remove limitation
                     if ((item.count < currentIngredient.count) and (item.name == currentIngredient.name)) then
                         return false
                     elseif item.name == currentIngredient.name then
@@ -24,12 +25,16 @@ function canCraft(itemName, inv)
                         break
                     end
                 end
+                if (foundEnough == false) then
+                    return false
+                end
             end
             -- If we made it here then we found enough of all items
             return true
         end
     end
 
+    print("itemToCraft name not in recipeConfig!!!")
     return false
 end
 
@@ -52,6 +57,5 @@ while true do
         end
     end
 
-    os.startTimer(0.05)
-    os.pullEvent("timer")
+    sleep(0)
 end
