@@ -7,3 +7,4 @@ This script allows for automation of the Powah mod's energizing orb
 - [x] Recipe Selection
 - [ ] Limit Setting Per Recipe
 - [ ] Limit Setting Using GUI
+- [ ] Improve Performance
