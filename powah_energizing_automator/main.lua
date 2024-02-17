@@ -11,7 +11,7 @@ local mainInv = peripheral.wrap(peripheralConfig["mainInventory"])
 ---@param inv Inventory
 ---@param recipeConfig table
 ---@return boolean
-function canCraft(itemToCraft, inv)
+local function canCraft(itemToCraft, inv)
     for k, itemName in ipairs(recipeConfig) do
         if itemName.name == itemToCraft then
             for kk, currentIngredient in ipairs(itemName.ingredients) do
@@ -38,6 +38,20 @@ function canCraft(itemToCraft, inv)
     return false
 end
 
+---Finds an ingredient in the inventory and then pushes to orb.
+---Assumes that every stack has enough ingredients for craft. This
+---Code WILL BREAK if used with an inventory that isn't a dank, or if
+---a recipe contains identical unstackable items
+---@param ingredient table
+local function findItemAndPush(ingredient)
+    for slot, invItem in pairs(mainInv.list()) do
+        if invItem.name == ingredient.name then
+            mainInv.pushItems(peripheral.getName(orb), slot, ingredient.count)
+            return
+        end
+    end
+end
+
 while true do
     if (orb.getItemDetail(1) ~= nil) then
         orb.pushItems(peripheral.getName(mainInv), 1)
@@ -45,11 +59,7 @@ while true do
         for k, item in ipairs(recipeConfig) do
             if canCraft(item.name, mainInv) then
                 for _, ingredient in ipairs(item.ingredients) do
-                    for slot, invItem in pairs(mainInv.list()) do
-                        if invItem.name == ingredient.name then
-                            mainInv.pushItems(peripheral.getName(orb), slot, ingredient.count)
-                        end
-                    end
+                    findItemAndPush(ingredient)
                 end
                 -- After pushing items for craft, break from loop
                 break

@@ -99,7 +99,7 @@ return
         name = "infused_crystals:lapisium_crystal",
         ingredients =
         {
-            { name = "minecraft:lapis", count = 1 },
+            { name = "minecraft:lapis_lazuli", count = 1 },
         }
     },
     {
