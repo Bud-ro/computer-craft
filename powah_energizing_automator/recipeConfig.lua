@@ -2,6 +2,16 @@
 return
 {
     {
+        name = "mekanism:advanced_tier_installer",
+        ingredients =
+        {
+            { name = "mekanism:basic_tier_installer",               count = 1 },
+            { name = "mekanism:advanced_control_circuit",           count = 1 },
+            { name = "mekanism:alloy_infused",                      count = 1 },
+            { name = "infused_crystals:infused_redstonium_crystal", count = 1 },
+        }
+    },
+    {
         name = "stacia_tweaks:uwuterium_pile",
         ingredients =
         {
